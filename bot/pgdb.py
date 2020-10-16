@@ -33,9 +33,10 @@ def query(func):
 def query_insert(cursor, table_name, **params):
     keyses = values = masks = ''
     for key, value in params.items():
-        keyses += f' {key},'
-        values += f"'{value}',"
-        masks += ' %s,'
+        if not isinstance(value, dict):
+            keyses += f' {key},'
+            values += f"'{value}',"
+            masks += ' %s,'
     try:
         sql = f'INSERT INTO {table_name} ({keyses[1:-1]}) VALUES ({values[:-1]});'
         cursor.execute(sql, values)
