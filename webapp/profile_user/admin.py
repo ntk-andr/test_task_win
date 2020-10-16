@@ -8,5 +8,6 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone']
 
 
+@admin.register(Barcode)
 class BarcodeAdmin(admin.ModelAdmin):
     list_display = ['type', 'data', 'quality']
