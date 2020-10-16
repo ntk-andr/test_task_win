@@ -1,0 +1,8 @@
+volumes
+.idea
+.env
+*.pyc
+**/*.pyc
+
+/images/*
+/*/*/migrations/
