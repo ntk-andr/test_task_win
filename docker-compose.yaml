@@ -21,18 +21,18 @@ services:
       - ./volumes/storage/redis/data:/var/lib/redis/data
     ports:
       - 6379:6379
-
-  web:
-    build: .
-    container_name: web
-    ports:
-      - 8000:8000
-    volumes:
-      - ./webapp:/webapp
-      - ./bot:/bot
-    working_dir: /bot
-    depends_on:
-      - db
-
-    command: python app.py
-#    command: gunicorn --bind=0.0.0.0:8000 --name=webapp webapp.wsgi:application --reload -w 2
+#
+#  web:
+#    build: .
+#    container_name: web
+#    ports:
+#      - 8000:8000
+#    volumes:
+#      - ./webapp:/webapp
+#      - ./bot:/bot
+#    working_dir: /bot
+#    depends_on:
+#      - db
+#
+#    command: python app.py
+##    command: gunicorn --bind=0.0.0.0:8000 --name=webapp webapp.wsgi:application --reload -w 2

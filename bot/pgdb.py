@@ -9,7 +9,7 @@ conn = psycopg2.connect(
     database=env('POSTGRES_DB'),
     user=env('POSTGRES_USER'),
     password=env('POSTGRES_PASSWORD'),
-    host="db",
+    host=env('POSTGRES_HOST'),
     port=5432
 )
 
@@ -39,6 +39,8 @@ def query_insert(cursor, table_name, **params):
     try:
         sql = f'INSERT INTO {table_name} ({keyses[1:-1]}) VALUES ({values[:-1]});'
         cursor.execute(sql, values)
+    except psycopg2.errors.UniqueViolation as e:
+        pass
     except Exception as e:
         print(sql)
         print(e)
@@ -49,12 +51,12 @@ def query_update_by_id(cursor, table_name, id, **params):
     set_params = ''
     for key, value in params.items():
         set_params += f"{key}='{value}',"
-    try:
+    # try:
         sql = f'UPDATE {table_name} SET {set_params[:-1]} WHERE id = {id};'
         cursor.execute(sql)
-    except Exception as e:
-        print(sql)
-        print(e)
+    # except Exception as e:
+    #     print(sql)
+    #     print(e)
 
 # query_insert(table_name='profile_user_profile', name='sdfs', phone=233243)
 # query_update_by_id(conn, table_name='profile_user_profile', id=5, name='update!!!')

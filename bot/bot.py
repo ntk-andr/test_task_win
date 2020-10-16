@@ -9,7 +9,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeybo
 
 # from bot.pgdb import query_insert
 from pgdb import query_insert
-from bot.utils import get_info_barcode, save_in_redis, get_info_from_redis, get_chat_id
+from utils import get_info_barcode, save_in_redis, get_info_from_redis, get_chat_id
 
 load_dotenv()
 
@@ -94,8 +94,8 @@ def handle_barcode(message):
     downloaded_file = bot.download_file(file_info.file_path)
     real_filename = file_info.file_path.split('/')[-1]
     file_info.file_path = f'{message.from_user.id}-{message.date}-{real_filename}'
-    filename = f'images/{file_info.file_path}'
-
+    filename = f'../images/{file_info.file_path}'
+    print(os.path.abspath(filename))
     with open(filename, 'wb') as new_file:
         new_file.write(downloaded_file)
 
